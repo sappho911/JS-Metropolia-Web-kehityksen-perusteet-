@@ -1,16 +1,11 @@
-// console.log('Hello World!');
+'use strict';
 
-// const x = prompt("Enter x coordinate using space example: 5 6");
+const piste1 = prompt('Enter coordinates').split(',');
+const piste2 = prompt('Enter coordinates').split(',');
 
-// const parts = x.split(" ");
+const distance = Math.sqrt(
+  (+piste2[0] - +piste1[0]) ** 2 + (+piste2[1] - +piste1[1]) ** 2
+);
 
-// console.log(typeof parts);
-
-// const x1 = +parts[0];
-// const y1 = +parts[1];
-// console.log(typeof x1);
-// console.log(typeof y1);
-
-const pistet1 = '2, 5'.split(",");
-
-console.log(typeof pistet1);
+document.querySelector('.distance').innerHTML =
+  `Distance between two points is: ${distance}`;
