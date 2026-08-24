@@ -28,7 +28,6 @@ const todoList = [
 ];
 
 // add your code here
-
 const ul = document.querySelector('.todo');
 
 todoList.forEach(function (task) {
@@ -36,7 +35,7 @@ todoList.forEach(function (task) {
 
   const html = `
     <li>
-        <input type="checkbox" id="todo-${task.id} ${isCompleted}">
+        <input type="checkbox" id="todo-${task.id}" ${isCompleted}>
         <label for="todo-${task.id}">${task.task}</label>
     </li>
   `;
