@@ -771,3 +771,54 @@ const restaurants = [
 ];
 
 // your code here
+const restaurantsList = document.querySelector('.list');
+
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+function calculateDistance(x1, y1, x2, y2) {
+  return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}
+
+function success(position) {
+  const coords = position.coords;
+
+  const userLongitude = coords.longitude;
+  const userLatitude = coords.latitude;
+
+  console.log(userLatitude);
+  console.log(userLongitude);
+
+  const sortedRestaurants = restaurants.map((rest) => {
+    const [restLongitude, restLatitude] = rest.location.coordinates;
+    const distance = calculateDistance(
+      userLongitude,
+      userLatitude,
+      restLongitude,
+      restLatitude
+    );
+    return {...rest, distance};
+  });
+
+  sortedRestaurants.sort((a, b) => a.distance - b.distance);
+
+  sortedRestaurants.forEach(function (rest) {
+    const html = `
+      <tr>
+        <td>${rest.name}</td>
+        <td>${rest.address}</td>
+      </tr>
+    `;
+
+    restaurantsList.insertAdjacentHTML('beforeend', html);
+  });
+}
+
+function error(err) {
+  console.warn(`ERROR (${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
