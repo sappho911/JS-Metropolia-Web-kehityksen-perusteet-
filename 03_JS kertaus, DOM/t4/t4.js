@@ -789,9 +789,6 @@ function success(position) {
   const userLongitude = coords.longitude;
   const userLatitude = coords.latitude;
 
-  console.log(userLatitude);
-  console.log(userLongitude);
-
   const sortedRestaurants = restaurants.map((rest) => {
     const [restLongitude, restLatitude] = rest.location.coordinates;
     const distance = calculateDistance(
