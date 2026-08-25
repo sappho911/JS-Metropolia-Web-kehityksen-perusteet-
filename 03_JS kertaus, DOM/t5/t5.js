@@ -1,3 +1,5 @@
+'use strict';
+
 const restaurants = [
   {
     location: {type: 'Point', coordinates: [25.018456, 60.228982]},
@@ -771,3 +773,41 @@ const restaurants = [
 ];
 
 // your code here
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+function success(position) {
+  const coords = position.coords;
+
+  const userLongitude = coords.longitude;
+  const userLatitude = coords.latitude;
+
+  const map = L.map('map').setView([userLatitude, userLongitude], 7);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+
+  restaurants.forEach(function (rest) {
+    const [restLongitude, restLatitude] = rest.location.coordinates;
+
+    L.marker([restLatitude, restLongitude])
+      .addTo(map)
+      .bindPopup(
+        `<h3>${rest.name}</h3>
+        <p>${rest.address}</p>
+        <p>${rest.city}</p>
+        `
+      );
+  });
+}
+
+function error(err) {
+  console.warn(`ERROR (${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
