@@ -771,3 +771,44 @@ const restaurants = [
 ];
 
 // your code here
+
+const table = document.querySelector('table');
+const dialog = document.querySelector('dialog');
+
+const sortedRestaurants = [...restaurants].sort((a, b) =>
+  a.name.localeCompare(b.name)
+);
+
+sortedRestaurants.forEach(function (rest) {
+  const tr = document.createElement('tr');
+  tr.className = 'restaurant-row';
+
+  tr.innerHTML = `
+    <td>${rest.name}</td>
+    <td>${rest.address}</td>
+  `;
+
+  tr.addEventListener('click', function () {
+    document.querySelectorAll('.restaurant-row').forEach(function (row) {
+      row.classList.remove('highlight');
+    });
+
+    tr.classList.add('highlight');
+
+    dialog.innerHTML = `
+      <form method="dialog">
+        <h2>${rest.name}</h2>
+        <p><strong>Address:</strong> ${rest.address}</p>
+        <p><strong>Postal code:</strong> ${rest.postalCode}</p>
+        <p><strong>City:</strong> ${rest.city}</p>
+        <p><strong>Phone:</strong> ${rest.phone}</p>
+        <p><strong>Company:</strong> ${rest.company}</p>
+        <button>Close</button>
+      </form>
+    `;
+
+    dialog.showModal();
+  });
+
+  table.appendChild(tr);
+});
