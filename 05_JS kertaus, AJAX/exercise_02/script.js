@@ -3,7 +3,6 @@
 // your code here
 const table = document.querySelector('table');
 const dialog = document.querySelector('dialog');
-// const urlAll = '/api/v1/restaurants';
 
 const url = 'https://media1.edu.metropolia.fi/restaurant/api/v1/restaurants';
 
