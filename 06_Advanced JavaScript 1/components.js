@@ -1,17 +1,16 @@
 'use strict';
 
 export const restaurantRow = (restaurant) => {
-  const {name, company} = restaurant;
+  return restaurant.map(({name, company}) => {
+    const tr = document.createElement('tr');
 
-  const tr = document.createElement('tr');
-  tr.className = 'restaurant-row';
+    tr.innerHTML = `
+        <td>${name}</td>
+        <td>${company}</td>
+      `;
 
-  tr.innerHTML = `
-    <td>${name}</td>
-    <td>${company}</td>
-  `;
-
-  return tr;
+    return tr;
+  });
 };
 
 export const restaurantModal = (restaurant, menu) => {
