@@ -1,7 +1,7 @@
 'use strict';
 
 import {restaurantRow, restaurantModal} from './components.js';
-import {fetchData, sortRest} from './exercise_01/utils.js';
+import {fetchData, sortRest} from './utils.js';
 import {API_ALL_RESTAURANTS, API_RESTAURANT_MENU} from './veriables.js';
 
 const table = document.querySelector('table');
